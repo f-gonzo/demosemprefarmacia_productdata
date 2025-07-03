@@ -1,124 +1,294 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    <!-- Contenuto originale dell'header, ma con titolo e meta tag dinamici -->
     <meta charset="UTF-8">
-    <title>{{title}} | Semprefarmacia</title>
-    <meta name="title" content="{{title}}">
-    <meta name="description" content="{{short_description}}">
+    <title>{{title}}</title>
+    <meta name="title" content="{{meta_title}}">
+    <meta name="description" content="{{meta_description}}">
     <meta name="keywords" content="{{meta_keyword}}">
-    <meta name="robots" content="NOINDEX,NOFOLLOW">
-    <!-- ... il resto dell'immenso header del file originale va qui ... -->
-    <!-- Per questioni di brevità, ho omesso gran parte dell'header statico,
-         ma nella versione reale dovresti includere tutto il contenuto
-         del tag <head> del file Armolipid, fino alla chiusura </head> -->
-    <style>
-        /* Aggiungo uno stile base per evitare problemi di visualizzazione */
-        body { font-family: sans-serif; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="product-style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="page-wrapper">
-        <header class="page-header">
-            <!-- Header statico dell'esempio -->
-        </header>
-        <main id="maincontent" class="page-main">
-            <div class="columns">
-                <div class="column main">
-                    <div class="product-info-main">
-                        <section>
-                            <div class="w-full grid mb-6 relative grid-cols-12 auto-rows-min">
-                                <!-- Sezione Immagine -->
-                                <div class="col-span-12 lg:col-span-4 row-span-6 lg:order-1 lg:mr-6 relative">
-                                    <div id="gallery" class="w-full">
-                                        <img alt="{{title}}" title="{{title}}" class="object-contain object-center w-full" src="{{image_url}}" itemprop="image">
-                                    </div>
-                                </div>
+    <main class="product-page">
+        <div class="breadcrumbs">
+            <span>Home</span> / <span>Integratori</span> / <span>...</span> / <span>{{title}}</span>
+        </div>
 
-                                <!-- Titolo Prodotto -->
-                                <div class="h-auto w-full col-span-9 lg:col-span-4 mb-3 mt-3 lg:order-2">
-                                    <div class="flex justify-between items-center mb-2">
-                                        <h1 class="h4 font-bold">{{title}}</h1>
-                                    </div>
-                                </div>
+        <div class="product-main-grid">
+            <!-- Colonna Immagine -->
+            <div class="product-image-column">
+                <div class="gallery">
+                    <img src="{{image_url}}" alt="{{title}}">
+                </div>
+            </div>
 
-                                <div class="lg:col-span-4 col-span-6 lg:order-6 mb-4 lg:mb-0 ml-auto lg:ml-0 stockStatus">
-                                    <div class="text-right ul-enhanced text-xs md:text-sm w-fit">
-                                            <div class="stock-corner border-success border pl-1.5 pr-3 flex items-center available stock rounded-full h-6" title="Disponibilita'">
-                                        <p class="stock-bullet text-success flex items-center gap-2 text-3xl">•<span class="stock-label text-xxs text-primary">Disponibile</span></p>
-                                    </div>
-                                    </div>
-                                </div>
-
-                                <!-- Box Prezzo -->
-                                <div class="w-full row-span-9 col-span-12 lg:col-span-4 lg:pl-10 lg:order-3" id="priceBox">
-                                     <!-- Lasciamo il prezzo statico per semplicità, ma si potrebbe mappare anche questo -->
-                                     <div class="price-container flex gap-2 flex-wrap">
-                                        <div class="values">
-                                            <div class="final-price inline-block text-3xl md:text-4xl font-bold">
-                                                <span class="price font-bold text-sale">€ --,--</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Descrizione Breve -->
-                                <div class="w-full col-span-12 lg:col-span-4 order-4 mt-6 lg:mt-4 mb-4 lg:order-7">
-                                    <div class="ul-enhanced">
-                                        <div class="text-xs">
-                                            <p>{{short_description}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <!-- Attributi -->
-                                <div class="order-9 col-span-12 lg:order-8 lg:col-span-8 lg:mt-10 flex gap-x-3 gap-y-2 lg:gap-x-4 lg:gap-y-3 flex-wrap product-attributes">
-                                     <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
-                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
-                                            <strong>Brand:</strong> {{manufacturer}}
-                                        </div>
-                                    </div>
-                                     <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
-                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
-                                            <strong>Minsan:</strong> {{id}}
-                                        </div>
-                                    </div>
-                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
-                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
-                                            <strong>Formato:</strong> {{formato}}
-                                        </div>
-                                    </div>
-                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
-                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
-                                            <strong>Azione:</strong> {{azione}}
-                                        </div>
-                                    </div>
-                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
-                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
-                                            <strong>Problematica:</strong> {{problematica}}
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                        
-                        <!-- Descrizione Lunga -->
-                        <section class="scroll-mt-64" id="description">
-                            <div class="flex items-center justify-between mb-5 lg:mb-6 description-title">
-                                <div class="h2 font-bold">Descrizione</div>
-                            </div>
-                            <div class="description-content text-primary-darker mb-4 lg:mb-6">
-                                <!-- Il CSV contiene HTML, quindi lo inietteremo direttamente -->
-                                {{description}}
-                            </div>
-                        </section>
+            <!-- Colonna Info Principali -->
+            <div class="product-info-column">
+                <h1 class="product-title">{{title}}</h1>
+                <div class="reviews-placeholder">
+                    <span>★★★★★</span> (149 Recensioni)
+                </div>
+                <div class="short-description">
+                    <p>{{short_description}}</p>
+                    <a href="#description" class="description-link">Leggi descrizione</a>
+                </div>
+            </div>
+            
+            <!-- Colonna Buy Box -->
+            <div class="product-buy-column">
+                <div class="price-box">
+                    <div class="price-wrapper">
+                        <span class="final-price">€ 35,60</span>
+                        <span class="old-price">€ 60,80</span>
+                        <span class="discount-badge">-41%</span>
+                    </div>
+                    <div class="stock-info">Disponibile</div>
+                    <div class="delivery-info">
+                        Spedizione prevista tra <strong>venerdì 04 luglio</strong> e <strong>lunedì 07 luglio</strong>
+                    </div>
+                    <div class="actions">
+                        <div class="qty-selector">
+                            <button>-</button>
+                            <input type="text" value="1">
+                            <button>+</button>
+                        </div>
+                        <button class="add-to-cart">Aggiungi al Carrello</button>
+                    </div>
+                    <div class="payment-info">
+                        Paga in 3 rate da € 11,87 senza interessi.
                     </div>
                 </div>
             </div>
-        </main>
-        <footer class="page-footer">
-            <!-- Footer statico dell'esempio -->
-        </footer>
-    </div>
+        </div>
+
+        <!-- Sezione Chip Attributi -->
+        <div class="product-attributes-section">
+            <div id="attribute-chips-container" class="attribute-chips">
+                <!-- I chip verranno iniettati qui dallo script -->
+                {{attribute_chips_html}}
+            </div>
+        </div>
+
+        <!-- Sezione Descrizione Lunga -->
+        <div class="product-description-section" id="description">
+            <h2 class="section-title">Descrizione</h2>
+            <div class="description-content">
+                {{description}}
+            </div>
+        </div>
+
+    </main>
 </body>
 </html>
+```---
+
+### 5. `product-style.css`
+
+Questo nuovo file CSS è dedicato a replicare l'aspetto della pagina prodotto di Semprefarmacia.
+
+```css
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff;
+    color: #1e2957;
+    margin: 0;
+    padding: 20px;
+}
+
+.product-page {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumbs {
+    font-size: 12px;
+    color: #6c757d;
+    margin-bottom: 20px;
+}
+
+.product-main-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 20px;
+}
+
+.product-image-column {
+    grid-column: span 4;
+}
+
+.gallery img {
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+}
+
+.product-info-column {
+    grid-column: span 5;
+}
+
+.product-title {
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 0 10px 0;
+    color: #000;
+}
+
+.reviews-placeholder {
+    font-size: 14px;
+    color: #f6e05e;
+    margin-bottom: 15px;
+}
+
+.reviews-placeholder span {
+    letter-spacing: 2px;
+}
+
+.short-description p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #343a40;
+}
+
+.description-link {
+    color: #007bff;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.product-buy-column {
+    grid-column: span 3;
+}
+
+.price-box {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+}
+
+.price-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.final-price {
+    font-size: 28px;
+    font-weight: 700;
+    color: #e63946;
+}
+
+.old-price {
+    font-size: 18px;
+    text-decoration: line-through;
+    color: #6c757d;
+}
+
+.discount-badge {
+    background-color: #1e2957;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.stock-info {
+    color: #28a745;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.delivery-info {
+    font-size: 12px;
+    margin-bottom: 20px;
+}
+
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.qty-selector {
+    display: flex;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+}
+
+.qty-selector button {
+    background: #f8f9fa;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+}
+
+.qty-selector input {
+    width: 40px;
+    text-align: center;
+    border: none;
+    border-left: 1px solid #ced4da;
+    border-right: 1px solid #ced4da;
+}
+
+.add-to-cart {
+    flex-grow: 1;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.payment-info {
+    font-size: 12px;
+    text-align: center;
+}
+
+.product-attributes-section {
+    margin-top: 30px;
+}
+
+.attribute-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.chip {
+    background-color: #e9ecef;
+    color: #495057;
+    padding: 8px 12px;
+    border-radius: 16px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.chip-label {
+    font-weight: 600;
+    text-transform: capitalize;
+}
+
+.product-description-section {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+.section-title {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+.description-content {
+    font-size: 14px;
+    line-height: 1.6;
+}

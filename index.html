@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Page Mockup Generator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <aside class="sidebar">
+            <header>
+                <h1>Pagine Prodotto</h1>
+                <input type="file" id="csvFileInput" accept=".csv">
+                <label for="csvFileInput" class="file-label">Carica CSV</label>
+            </header>
+            <nav id="productListContainer">
+                <p>Carica un file CSV per iniziare.</p>
+                <ul id="productList">
+                    <!-- I link ai prodotti verranno inseriti qui dallo script -->
+                </ul>
+            </nav>
+        </aside>
+        <main class="content-viewer">
+            <iframe id="productFrame" title="Anteprima Prodotto"></iframe>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

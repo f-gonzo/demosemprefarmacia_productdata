@@ -7,8 +7,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let templateHtml = '';
     let products = [];
     
-    // Colonne che non devono diventare "chip"
-    const CORE_FIELDS = ['id', 'title', 'description', 'short_description', 'manufacturer', 'image_url', 'meta_title', 'meta_description', 'meta_keyword'];
+    // Colonne da non mostrare come chip
+    const CORE_FIELDS = [
+        'id', 'title', 'description', 'short_description', 'manufacturer', 
+        'image_url', 'meta_title', 'meta_description', 'meta_keyword'
+    ];
 
     // Carica il template HTML
     fetch('template.html')
@@ -19,10 +22,9 @@ document.addEventListener('DOMContentLoaded', function() {
         .then(html => templateHtml = html)
         .catch(error => {
             productListContainer.innerHTML = `<p style="color:red; padding:15px;">${error.message}</p>`;
-            console.error(error);
         });
 
-    // Gestisce il caricamento e il parsing del CSV
+    // Gestisce il caricamento e il parsing del CSV con PapaParse
     csvFileInput.addEventListener('change', event => {
         const file = event.target.files[0];
         if (!file || !templateHtml) return;
@@ -31,11 +33,15 @@ document.addEventListener('DOMContentLoaded', function() {
             header: true,
             skipEmptyLines: true,
             complete: function(results) {
-                products = results.data;
+                products = results.data.map(p => {
+                    // Pulisce l'ID da eventuali caratteri non numerici
+                    if (p.id) p.id = p.id.replace(/[^0-9]/g, '');
+                    return p;
+                });
                 renderProductList();
             },
             error: function(error) {
-                 productListContainer.innerHTML = `<p style="color:red; padding:15px;">Errore nel parsing del CSV: ${error.message}</p>`;
+                productListContainer.innerHTML = `<p style="color:red; padding:15px;">Errore nel parsing del CSV: ${error.message}</p>`;
             }
         });
     });
@@ -68,37 +74,32 @@ document.addEventListener('DOMContentLoaded', function() {
         const product = products[index];
         let finalHtml = templateHtml;
 
-        // Genera HTML per i chip degli attributi
-        let chipsHtml = '';
-        for (const key in product) {
-            // Se la colonna non è un campo core e ha un valore non vuoto/placeholder
-            if (!CORE_FIELDS.includes(key) && product[key] && product[key].trim() !== '-') {
-                 chipsHtml += `
-                    <div class="chip">
-                        <span class="chip-label">${key.replace(/_/g, ' ')}:</span>
-                        <span>${product[key]}</span>
-                    </div>
-                `;
-            }
-        }
+        // 1. Genera HTML per i chip degli attributi
+        let chipsHtml = Object.entries(product)
+            .filter(([key, value]) => !CORE_FIELDS.includes(key) && value && value.trim() !== '-')
+            .map(([key, value]) => `
+                <div class="chip">
+                    <span class="chip-label">${key.replace(/_/g, ' ')}:</span>
+                    <span>${value}</span>
+                </div>
+            `)
+            .join('');
         
-        // Sostituisci il placeholder dei chip
+        // 2. Sostituisce il placeholder dei chip
         finalHtml = finalHtml.replace('{{attribute_chips_html}}', chipsHtml);
 
-        // Sostituisce gli altri segnaposto
+        // 3. Sostituisce gli altri placeholder
         for (const key in product) {
             const regex = new RegExp(`{{${key}}}`, 'g');
             finalHtml = finalHtml.replace(regex, product[key]);
         }
         
-        // Pulisce i segnaposto non trovati
-        finalHtml = finalHtml.replace(/\{\{\w+\}\}/g, '');
-        
-        // Aggiunge un'immagine placeholder se manca l'URL
+        // 4. Pulisce eventuali placeholder non trovati e gestisce l'immagine
+        finalHtml = finalHtml.replace(/\{\{\w+\}\}/g, 'N/D');
         if (!product.image_url) {
              finalHtml = finalHtml.replace('src=""', 'src="https://via.placeholder.com/400x400.png?text=Immagine+mancante"');
         }
-
+        
         productFrame.srcdoc = finalHtml;
         updateActiveLink(index);
     }

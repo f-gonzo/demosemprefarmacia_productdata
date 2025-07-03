@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generatore Pagine Prodotto</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Generatore Pagine Prodotto da CSV</h1>
+    </header>
+
+    <main>
+        <section id="upload-section">
+            <h2>Carica il tuo file CSV</h2>
+            <input type="file" id="csvFileInput" accept=".csv">
+        </section>
+
+        <section id="product-display-section">
+            <h2>Anteprima Prodotto</h2>
+            <div id="product-navigation">
+                <button id="prevProduct" disabled>Precedente</button>
+                <span id="productIndicator">Prodotto 0 di 0</span>
+                <button id="nextProduct" disabled>Successivo</button>
+            </div>
+            <div id="product-content">
+                <!-- Il contenuto del prodotto verrà inserito qui -->
+                <p>Carica un file CSV per visualizzare i prodotti.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2023 Generatore Pagine Prodotto</p>
+    </footer>
+
+    <script src="script.js"></script></body>
+</html>

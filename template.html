@@ -3,292 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <title>{{title}}</title>
-    <meta name="title" content="{{meta_title}}">
-    <meta name="description" content="{{meta_description}}">
-    <meta name="keywords" content="{{meta_keyword}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Collega il nuovo foglio di stile -->
     <link rel="stylesheet" href="product-style.css">
+    <!-- Importa il font Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <main class="product-page">
-        <div class="breadcrumbs">
-            <span>Home</span> / <span>Integratori</span> / <span>...</span> / <span>{{title}}</span>
-        </div>
-
-        <div class="product-main-grid">
-            <!-- Colonna Immagine -->
-            <div class="product-image-column">
-                <div class="gallery">
-                    <img src="{{image_url}}" alt="{{title}}">
-                </div>
+    <div class="page-wrapper">
+        <main id="maincontent" class="page-main">
+            <div class="breadcrumbs">
+                <span>Home</span> / <span>Placeholder</span> / <span>{{title}}</span>
             </div>
-
-            <!-- Colonna Info Principali -->
-            <div class="product-info-column">
-                <h1 class="product-title">{{title}}</h1>
-                <div class="reviews-placeholder">
-                    <span>★★★★★</span> (149 Recensioni)
-                </div>
-                <div class="short-description">
-                    <p>{{short_description}}</p>
-                    <a href="#description" class="description-link">Leggi descrizione</a>
-                </div>
-            </div>
-            
-            <!-- Colonna Buy Box -->
-            <div class="product-buy-column">
-                <div class="price-box">
-                    <div class="price-wrapper">
-                        <span class="final-price">€ 35,60</span>
-                        <span class="old-price">€ 60,80</span>
-                        <span class="discount-badge">-41%</span>
+            <div class="product-view">
+                <div class="product-main-info">
+                    <div class="product-media">
+                        <img src="{{image_url}}" alt="{{title}}">
                     </div>
-                    <div class="stock-info">Disponibile</div>
-                    <div class="delivery-info">
-                        Spedizione prevista tra <strong>venerdì 04 luglio</strong> e <strong>lunedì 07 luglio</strong>
-                    </div>
-                    <div class="actions">
-                        <div class="qty-selector">
-                            <button>-</button>
-                            <input type="text" value="1">
-                            <button>+</button>
+                    <div class="product-details">
+                        <h1 class="product-title">{{title}}</h1>
+                        <div class="product-reviews-summary">
+                            <span class="stars">★★★★★</span>
+                            <span class="reviews-count">(149)</span>
                         </div>
-                        <button class="add-to-cart">Aggiungi al Carrello</button>
+                        <div class="product-short-description">
+                            <p>{{short_description}}</p>
+                            <a href="#description" class="details-link">Leggi descrizione completa</a>
+                        </div>
                     </div>
-                    <div class="payment-info">
-                        Paga in 3 rate da € 11,87 senza interessi.
+                    <div class="product-buy-box">
+                        <div class="price-box">
+                            <div class="price-container">
+                                <span class="old-price">€ 60,80</span>
+                                <span class="final-price">€ 35,60</span>
+                            </div>
+                            <div class="discount-container">
+                                <span class="discount-badge">-41%</span>
+                            </div>
+                        </div>
+                        <div class="stock-status available">
+                            Disponibile
+                        </div>
+                        <div class="delivery-info">
+                            <p>Spedizione prevista tra <strong>venerdì 04 luglio</strong> e <strong>lunedì 07 luglio</strong></p>
+                        </div>
+                        <div class="product-actions">
+                            <div class="qty-selector">
+                                <button type="button">-</button>
+                                <input type="text" value="1" />
+                                <button type="button">+</button>
+                            </div>
+                            <button type="submit" class="add-to-cart-button">Aggiungi al Carrello</button>
+                        </div>
+                         <div class="payment-info">
+                            <p>Paga in 3 rate da € 11,87 senza interessi.</p>
+                        </div>
+                        <div class="add-to-wishlist">
+                            <a href="#">Aggiungi ai Preferiti</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product-attributes-container">
+                    {{attribute_chips_html}}
+                </div>
+                
+                <div class="product-description-container" id="description">
+                    <h2 class="section-title">Descrizione</h2>
+                    <div class="description-content">
+                        {{description}}
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Sezione Chip Attributi -->
-        <div class="product-attributes-section">
-            <div id="attribute-chips-container" class="attribute-chips">
-                <!-- I chip verranno iniettati qui dallo script -->
-                {{attribute_chips_html}}
-            </div>
-        </div>
-
-        <!-- Sezione Descrizione Lunga -->
-        <div class="product-description-section" id="description">
-            <h2 class="section-title">Descrizione</h2>
-            <div class="description-content">
-                {{description}}
-            </div>
-        </div>
-
-    </main>
+        </main>
+    </div>
 </body>
 </html>
-```---
-
-### 5. `product-style.css`
-
-Questo nuovo file CSS è dedicato a replicare l'aspetto della pagina prodotto di Semprefarmacia.
-
-```css
-body {
-    font-family: 'Poppins', sans-serif;
-    background-color: #fff;
-    color: #1e2957;
-    margin: 0;
-    padding: 20px;
-}
-
-.product-page {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-.breadcrumbs {
-    font-size: 12px;
-    color: #6c757d;
-    margin-bottom: 20px;
-}
-
-.product-main-grid {
-    display: grid;
-    grid-template-columns: repeat(12, 1fr);
-    gap: 20px;
-}
-
-.product-image-column {
-    grid-column: span 4;
-}
-
-.gallery img {
-    width: 100%;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-}
-
-.product-info-column {
-    grid-column: span 5;
-}
-
-.product-title {
-    font-size: 24px;
-    font-weight: 700;
-    margin: 0 0 10px 0;
-    color: #000;
-}
-
-.reviews-placeholder {
-    font-size: 14px;
-    color: #f6e05e;
-    margin-bottom: 15px;
-}
-
-.reviews-placeholder span {
-    letter-spacing: 2px;
-}
-
-.short-description p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #343a40;
-}
-
-.description-link {
-    color: #007bff;
-    text-decoration: none;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.product-buy-column {
-    grid-column: span 3;
-}
-
-.price-box {
-    background-color: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border: 1px solid #e9ecef;
-}
-
-.price-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.final-price {
-    font-size: 28px;
-    font-weight: 700;
-    color: #e63946;
-}
-
-.old-price {
-    font-size: 18px;
-    text-decoration: line-through;
-    color: #6c757d;
-}
-
-.discount-badge {
-    background-color: #1e2957;
-    color: white;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-size: 12px;
-    font-weight: 700;
-}
-
-.stock-info {
-    color: #28a745;
-    font-weight: 600;
-    margin-bottom: 10px;
-}
-
-.delivery-info {
-    font-size: 12px;
-    margin-bottom: 20px;
-}
-
-.actions {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 15px;
-}
-
-.qty-selector {
-    display: flex;
-    border: 1px solid #ced4da;
-    border-radius: 5px;
-}
-
-.qty-selector button {
-    background: #f8f9fa;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-}
-
-.qty-selector input {
-    width: 40px;
-    text-align: center;
-    border: none;
-    border-left: 1px solid #ced4da;
-    border-right: 1px solid #ced4da;
-}
-
-.add-to-cart {
-    flex-grow: 1;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 5px;
-    font-weight: 600;
-    cursor: pointer;
-}
-
-.payment-info {
-    font-size: 12px;
-    text-align: center;
-}
-
-.product-attributes-section {
-    margin-top: 30px;
-}
-
-.attribute-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.chip {
-    background-color: #e9ecef;
-    color: #495057;
-    padding: 8px 12px;
-    border-radius: 16px;
-    font-size: 13px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-}
-.chip-label {
-    font-weight: 600;
-    text-transform: capitalize;
-}
-
-.product-description-section {
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid #e0e0e0;
-}
-.section-title {
-    font-size: 22px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-.description-content {
-    font-size: 14px;
-    line-height: 1.6;
-}

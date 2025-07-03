@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <!-- Contenuto originale dell'header, ma con titolo e meta tag dinamici -->
+    <meta charset="UTF-8">
+    <title>{{title}} | Semprefarmacia</title>
+    <meta name="title" content="{{title}}">
+    <meta name="description" content="{{short_description}}">
+    <meta name="keywords" content="{{meta_keyword}}">
+    <meta name="robots" content="NOINDEX,NOFOLLOW">
+    <!-- ... il resto dell'immenso header del file originale va qui ... -->
+    <!-- Per questioni di brevità, ho omesso gran parte dell'header statico,
+         ma nella versione reale dovresti includere tutto il contenuto
+         del tag <head> del file Armolipid, fino alla chiusura </head> -->
+    <style>
+        /* Aggiungo uno stile base per evitare problemi di visualizzazione */
+        body { font-family: sans-serif; }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="page-header">
+            <!-- Header statico dell'esempio -->
+        </header>
+        <main id="maincontent" class="page-main">
+            <div class="columns">
+                <div class="column main">
+                    <div class="product-info-main">
+                        <section>
+                            <div class="w-full grid mb-6 relative grid-cols-12 auto-rows-min">
+                                <!-- Sezione Immagine -->
+                                <div class="col-span-12 lg:col-span-4 row-span-6 lg:order-1 lg:mr-6 relative">
+                                    <div id="gallery" class="w-full">
+                                        <img alt="{{title}}" title="{{title}}" class="object-contain object-center w-full" src="{{image_url}}" itemprop="image">
+                                    </div>
+                                </div>
+
+                                <!-- Titolo Prodotto -->
+                                <div class="h-auto w-full col-span-9 lg:col-span-4 mb-3 mt-3 lg:order-2">
+                                    <div class="flex justify-between items-center mb-2">
+                                        <h1 class="h4 font-bold">{{title}}</h1>
+                                    </div>
+                                </div>
+
+                                <div class="lg:col-span-4 col-span-6 lg:order-6 mb-4 lg:mb-0 ml-auto lg:ml-0 stockStatus">
+                                    <div class="text-right ul-enhanced text-xs md:text-sm w-fit">
+                                            <div class="stock-corner border-success border pl-1.5 pr-3 flex items-center available stock rounded-full h-6" title="Disponibilita'">
+                                        <p class="stock-bullet text-success flex items-center gap-2 text-3xl">•<span class="stock-label text-xxs text-primary">Disponibile</span></p>
+                                    </div>
+                                    </div>
+                                </div>
+
+                                <!-- Box Prezzo -->
+                                <div class="w-full row-span-9 col-span-12 lg:col-span-4 lg:pl-10 lg:order-3" id="priceBox">
+                                     <!-- Lasciamo il prezzo statico per semplicità, ma si potrebbe mappare anche questo -->
+                                     <div class="price-container flex gap-2 flex-wrap">
+                                        <div class="values">
+                                            <div class="final-price inline-block text-3xl md:text-4xl font-bold">
+                                                <span class="price font-bold text-sale">€ --,--</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Descrizione Breve -->
+                                <div class="w-full col-span-12 lg:col-span-4 order-4 mt-6 lg:mt-4 mb-4 lg:order-7">
+                                    <div class="ul-enhanced">
+                                        <div class="text-xs">
+                                            <p>{{short_description}}</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Attributi -->
+                                <div class="order-9 col-span-12 lg:order-8 lg:col-span-8 lg:mt-10 flex gap-x-3 gap-y-2 lg:gap-x-4 lg:gap-y-3 flex-wrap product-attributes">
+                                     <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
+                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
+                                            <strong>Brand:</strong> {{manufacturer}}
+                                        </div>
+                                    </div>
+                                     <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
+                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
+                                            <strong>Minsan:</strong> {{id}}
+                                        </div>
+                                    </div>
+                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
+                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
+                                            <strong>Formato:</strong> {{formato}}
+                                        </div>
+                                    </div>
+                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
+                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
+                                            <strong>Azione:</strong> {{azione}}
+                                        </div>
+                                    </div>
+                                    <div class="text-xs md:text-sm text-primary w-full lg:w-fit">
+                                        <div class="bg-gray-10 w-fit rounded-md font-bold overflow-hidden p-2">
+                                            <strong>Problematica:</strong> {{problematica}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                        
+                        <!-- Descrizione Lunga -->
+                        <section class="scroll-mt-64" id="description">
+                            <div class="flex items-center justify-between mb-5 lg:mb-6 description-title">
+                                <div class="h2 font-bold">Descrizione</div>
+                            </div>
+                            <div class="description-content text-primary-darker mb-4 lg:mb-6">
+                                <!-- Il CSV contiene HTML, quindi lo inietteremo direttamente -->
+                                {{description}}
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <footer class="page-footer">
+            <!-- Footer statico dell'esempio -->
+        </footer>
+    </div>
+</body>
+</html>
